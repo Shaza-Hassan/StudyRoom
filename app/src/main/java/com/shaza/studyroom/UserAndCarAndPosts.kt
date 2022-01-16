@@ -7,7 +7,7 @@ data class UserAndCarAndPosts(
     @Embedded val user: User,
     @Relation(
         parentColumn = "uid",
-        entityColumn = "carId"
+        entityColumn = "carOwnerId"
     )
     val car: Car,
 

@@ -6,8 +6,8 @@ import com.shaza.studyroom.converter.Converter
 import com.shaza.studyroom.converter.UserForConverter
 
 @Database(
-    entities = [UserForConverter::class],
-    version = 1
+    entities = [UserForConverter::class,User::class,Car::class,Post::class],
+    version = 2
 )
 @TypeConverters(Converter::class)
 abstract class AppDatabase : RoomDatabase() {

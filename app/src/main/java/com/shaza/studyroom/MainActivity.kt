@@ -17,29 +17,31 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel.usersCount.observe(this,{
+        viewModel.users.observe(this,{
             findViewById<TextView>(R.id.textView).text = it.toString()
         })
 
         viewModel.userAllData.observe(this,{
-            findViewById<TextView>(R.id.allData).text = it.toString()
+            if (it != null)
+                findViewById<TextView>(R.id.allData).text = it.toString()
         })
         viewModel.listenToUsers()
     }
 
     fun addUser(view: View) {
         viewModel.addUsers()
+        viewModel.addUser()
     }
 
     fun addNewCar(view:View) {
         view.isEnabled = false
-//        viewModel.addCar()
+        viewModel.addCar()
     }
     fun addPosts(view: View) {
-//        viewModel.addPosts()
+        viewModel.addPosts()
     }
 
     fun getData(view: View) {
-//        viewModel.getAllData()
+        viewModel.getAllData()
     }
 }

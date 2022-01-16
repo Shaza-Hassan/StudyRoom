@@ -9,17 +9,23 @@ class UserRepo @Inject constructor(
 
     fun getAllUsers() = userDao.getAll()
 
-//    fun getAllData() = userDao.getAllData()
+    fun getAllUser() = userDao.getAllUser()
+
+    fun getAllData() = userDao.getAllData()
 
     suspend fun addUsers(vararg users:UserForConverter) {
         userDao.insertAll(*users)
     }
 
-//    suspend fun addCar(car: Car){
-//        userDao.insertCar(car)
-//    }
-//
-//    suspend fun addPosts(vararg posts:Post){
-//        userDao.insertPosts(*posts)
-//    }
+    suspend fun addUser( users:User) {
+        userDao.insertUser(users)
+    }
+
+    suspend fun addCar(car: Car){
+        userDao.insertCar(car)
+    }
+
+    suspend fun addPosts(vararg posts:Post){
+        userDao.insertPosts(*posts)
+    }
 }

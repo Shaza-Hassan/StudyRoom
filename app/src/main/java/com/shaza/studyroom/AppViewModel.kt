@@ -21,31 +21,30 @@ class AppViewModel @Inject constructor(
     private val userRepo: UserRepo
 ) : AndroidViewModel(application) {
     private val tag = this::class.java.simpleName
-    val usersCount = MutableLiveData<Int>()
-    val userAllData = MutableLiveData<List<UserForConverter>>()
+    val users = MutableLiveData<UserAndCarAndPosts>()
+    val userAllData = MutableLiveData<UserForConverter>()
 
     fun listenToUsers(){
         viewModelScope.launch {
-            userRepo.getAllUsers()
+            userRepo.getAllUser()
                 .catch {
                     Log.e(tag,it.localizedMessage)
                 }
                 .collect {
                     userAllData.postValue(it)
-                    usersCount.postValue(it.size)
                 }
         }
     }
 
-//    fun getAllData(){
-//        viewModelScope.launch {
-//            userRepo.getAllData().catch {
-//                Log.e(tag,it.localizedMessage)
-//            }.collect {
-//                userAllData.postValue(it)
-//            }
-//        }
-//    }
+    fun getAllData(){
+        viewModelScope.launch {
+            userRepo.getAllData().catch {
+                Log.e(tag,it.localizedMessage)
+            }.collect {
+                users.postValue(it)
+            }
+        }
+    }
 
     fun addUsers(){
         val user1 = UserForConverter(firstName = "Shaza 1", lastName = "Hassan"
@@ -99,26 +98,36 @@ class AppViewModel @Inject constructor(
             userRepo.addUsers(user1,user2,user3,user4,user5)
         }
     }
-//
-//    fun addCar(){
-//        val car = Car(carOwnerId = 1, carName = "Suzuki")
-//        viewModelScope.launch {
-//            userRepo.addCar(car)
-//        }
-//    }
-//
-//    fun addPosts(){
-//        val post1 = Post(postCreatorId = 1, postContent = "ay kalam 1")
-//        val post2 = Post(postCreatorId = 1, postContent = "ay kalam 2")
-//        val post3 = Post(postCreatorId = 1, postContent = "ay kalam 3")
-//        val post4 = Post(postCreatorId = 1, postContent = "ay kalam 4")
-//        val post5 = Post(postCreatorId = 1, postContent = "ay kalam 5")
-//        val post6 = Post(postCreatorId = 1, postContent = "ay kalam 6")
-//        val post7 = Post(postCreatorId = 1, postContent = "ay kalam 7")
-//        val post8 = Post(postCreatorId = 1, postContent = "ay kalam 8")
-//        val post9 = Post(postCreatorId = 1, postContent = "ay kalam 9")
-//        viewModelScope.launch {
-//            userRepo.addPosts(post1,post2,post3,post4,post5,post6,post7,post8,post9)
-//        }
-//    }
+
+    fun addUser(){
+        val user = User(
+            firstName = "First",
+            lastName = "Last"
+        )
+        viewModelScope.launch {
+            userRepo.addUser(user)
+        }
+    }
+
+    fun addCar(){
+        val car = Car(carOwnerId = 1, carName = "Suzuki")
+        viewModelScope.launch {
+            userRepo.addCar(car)
+        }
+    }
+
+    fun addPosts(){
+        val post1 = Post(postCreatorId = 1, postContent = "ay kalam 1")
+        val post2 = Post(postCreatorId = 1, postContent = "ay kalam 2")
+        val post3 = Post(postCreatorId = 1, postContent = "ay kalam 3")
+        val post4 = Post(postCreatorId = 1, postContent = "ay kalam 4")
+        val post5 = Post(postCreatorId = 1, postContent = "ay kalam 5")
+        val post6 = Post(postCreatorId = 1, postContent = "ay kalam 6")
+        val post7 = Post(postCreatorId = 1, postContent = "ay kalam 7")
+        val post8 = Post(postCreatorId = 1, postContent = "ay kalam 8")
+        val post9 = Post(postCreatorId = 1, postContent = "ay kalam 9")
+        viewModelScope.launch {
+            userRepo.addPosts(post1,post2,post3,post4,post5,post6,post7,post8,post9)
+        }
+    }
 }

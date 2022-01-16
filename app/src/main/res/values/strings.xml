@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">StudyRoom</string>
+    <string name="add_new_user">Add new user</string>
+    <string name="add_new_car">Add new Car</string>
+    <string name="get_data">Get Data</string>
+    <string name="add_posts">Add posts</string>
+</resources>
